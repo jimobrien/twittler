@@ -7,21 +7,55 @@
   <body>
     <script>
 
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+      window.twittler = {};
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
+      twittler.container = "#tweets";
+
+      twittler.fetch = function(user) {
+        var tweets;
+
+        if (!user) {
+          tweets = streams.home;
+        } else {
+          tweets = streams.home[user];
         }
+
+        return tweets;
+      };
+
+      twittler.display = function(tweets) {
+        var $tweet;
+
+        window.tst = $(this.container);
+        for (var i = 0, len = tweets.length; i < len; i+=1) {
+          $tweet = $('<div></div>');
+          $tweet.text('@' + tweets[i].user + ': ' + tweets[i].message);
+          $tweet.appendTo("#tweets");
+        }
+
+
+      };
+
+
+      $(document).ready(function(){
+
+        twittler.display(streams.home);
+        
+        // while(index >= 0){
+        //   var tweet = streams.home[index];
+        //   var $tweet = $('<div></div>');
+        //   $tweet.text('@' + tweet.user + ': ' + tweet.message);
+        //   $tweet.appendTo($body);
+        //   index -= 1;
+        // }
 
       });
 
+
     </script>
+
+    <div id="tweets">
+    </div>
+
   </body>
 </html>
