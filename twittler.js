@@ -12,13 +12,18 @@
 
         return this;
       };
-
+      twittler.processId = null;
       twittler.listen = function() {
         var self = this;
         var startlen = self.tweets.length;
         var tweetcount;
+        var intervalId
 
-        var intervalId = setInterval(listener, 300);
+        if (self.processId) {
+          clearInterval(self.processId);
+        }
+
+        intervalId = setInterval(listener, 300);
 
         function listener() {
           if (self.tweets.length > startlen) {
@@ -32,7 +37,7 @@
           newtweets.text(count + ' new tweets');
         }
 
-        return intervalId;
+        this.processId = intervalId;
       };
 
       twittler.display = function(tweets) {
@@ -87,5 +92,10 @@
           e.preventDefault();
           var username = e.currentTarget.outerText.replace("@", "");
           self.fetch(username).display();
+        });
+
+        $("#new-tweets").click( function(e){
+          e.preventDefault();
+          self.fetch().display().listen();
         });
       };
