@@ -7,16 +7,18 @@
         newTweets: "#new-tweets"
       };
 
+      twittler.view = 'home';
+
       twittler.newTweetCount = null;
 
       twittler.intervalId = null;
 
-      twittler.fetch = function(user) {
+      twittler.fetch = function(view) {
 
-        if (!user) {
+        if (!view || view === 'home') {
           this.tweets = streams.home;
         } else {
-          this.tweets = streams.users[user];
+          this.tweets = streams.users[view];
         }
 
         return this;
@@ -101,11 +103,12 @@
           e.preventDefault();
           var username = e.currentTarget.outerText.replace("@", "");
           self.fetch(username).display().listen();
+          self.view = username;
         });
 
         $("#new-tweets").click( function(e){
           e.preventDefault();
           $('#new-tweets').text('');
-          self.fetch().display().listen();
+          self.fetch(self.view).display().listen();
         });
       };
