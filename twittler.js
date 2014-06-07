@@ -13,11 +13,33 @@
         return this;
       };
 
+      twittler.listen = function() {
+        var startlen = self.tweets.length;
+        var tweetcount;
+        var self = this;
+
+        setTimeout( function() {
+          if (self.tweets.length > startlen) {
+            tweetcount = self.tweets.length - startlen;
+            updateNewTweetCount(tweetcount);
+            startlen = self.tweets.length;
+          }
+        }, 300);
+
+        function updateNewTweetCount(count) {
+          var newtweets = $('#new-tweets');
+
+          newtweets.text(count + ' new tweets');
+        }
+      };
+
       twittler.display = function(tweets) {
         var $tweet;
         var message;
 
         tweets = tweets || this.tweets;
+
+        window.twt = tweets;
 
         $("#tweets").html(''); // clear
 
