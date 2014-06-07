@@ -2,7 +2,10 @@
 
       twittler.tweets = [];
 
-      twittler.container = "#tweets";
+      twittler.container = {
+        tweets: "#tweets",
+        newTweets: "#new-tweets"
+      };
 
       twittler.newTweetCount = null;
 
@@ -19,49 +22,19 @@
         return this;
       };
 
-
-      twittler.listen = function() {
-        var self = this;
-        var startlen = self.tweets.length;
-        var intervalId;
-
-        // if an old interval loop exists, kill it
-        if (self.intervalId) {
-          clearInterval(self.intervalId);
-        }
-
-        // begin listening for changes
-        intervalId = setInterval(listener, 300);
-
-        function listener() {
-          if (self.tweets.length > startlen) {
-            self.newTweetCount = self.tweets.length - startlen;
-            updateNewTweetCount(self.newTweetCount);
-          }
-        }
-
-        function updateNewTweetCount(count) {
-          var newtweets = $('#new-tweets');
-          newtweets.text(count + ' new tweets');
-        }
-
-        this.intervalId = intervalId;
-      };
-
       twittler.display = function(tweets) {
         var $tweet;
         var message;
 
         tweets = tweets || this.tweets;
 
-        $("#tweets").html(''); // clear
+        $("#tweets").html(''); // clear container
 
         for (var i = 0, len = tweets.length; i < len; i+=1) {
           $tweet = $('<div class="tweet"></div>');
           message = formatmsg(tweets[i].message);
-
           $tweet.append('<span class="username"> @' + tweets[i].user + '</span>: ' + '<span class="message">' + message+ '</span>' + '<span class="timestamp"> —' + $.timeago(tweets[i].created_at) + '</span>');
-          $tweet.appendTo(this.container);
+          $tweet.appendTo(this.container.tweets);
         }
 
         function formatmsg(msg) {
@@ -90,6 +63,34 @@
         this.initEventHandlers();
 
         return this;
+      };
+
+      twittler.listen = function() {
+        var self = this;
+        var startlen = self.tweets.length;
+        var intervalId;
+
+        // if an old interval loop exists, kill it
+        if (self.intervalId) {
+          $(self.container.newTweets).text(''); //clear tweet counter
+          clearInterval(self.intervalId); // kill previous interval loop
+        }
+
+        // begin listening for changes
+        self.intervalId = setInterval(listener, 300);
+
+        function listener() {
+
+          if (self.tweets.length > startlen) {
+            self.newTweetCount = self.tweets.length - startlen;
+            updateNewTweetCount(self.newTweetCount);
+          }
+        }
+
+        function updateNewTweetCount(count) {
+          $(self.container.newTweets).text(count + ' new tweets');
+        }
+
       };
 
       twittler.initEventHandlers = function() {
