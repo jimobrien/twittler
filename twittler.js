@@ -1,7 +1,13 @@
       window.twittler = {};
 
-      twittler.container = "#tweets";
       twittler.tweets = [];
+
+      twittler.container = "#tweets";
+
+      twittler.newTweetCount = null;
+
+      twittler.intervalId = null;
+
       twittler.fetch = function(user) {
 
         if (!user) {
@@ -12,9 +18,9 @@
 
         return this;
       };
-      twittler.intervalId = null;
-      twittler.newTweetCount = 0;
-      twittler.listen = function(user) {
+
+
+      twittler.listen = function() {
         var self = this;
         var startlen = self.tweets.length;
         var intervalId;
@@ -48,8 +54,6 @@
 
         tweets = tweets || this.tweets;
 
-        window.twt = tweets;
-
         $("#tweets").html(''); // clear
 
         for (var i = 0, len = tweets.length; i < len; i+=1) {
@@ -82,7 +86,9 @@
 
           return formattedmsg || msg;
         }
+
         this.initEventHandlers();
+
         return this;
       };
 
