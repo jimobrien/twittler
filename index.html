@@ -7,6 +7,7 @@
         background: #fafafa;
         font-family: Open Sans;
         font-size: 13px;
+        color: #555;
       }
 
       input[type=text] {
@@ -80,10 +81,6 @@
       $(document).ready(function(){
         // load all tweets and listen for new tweets
         twittler.fetch().display().listen();
-
-        // attach event handlers;
-        twittler.initEventHandlers();
-
 
       });
 
