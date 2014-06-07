@@ -120,9 +120,11 @@
 
       twittler.initEventHandlers = function() {
         var self = this;
+
+        // load tweets for specific user when username is clicked
         $(".username").click( function(e){
-          var username = e.currentTarget.outerText.replace("@", "");
           e.preventDefault();
+          var username = e.currentTarget.outerText.replace("@", "");
           self.fetch(username).display();
         });
       };
