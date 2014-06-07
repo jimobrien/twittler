@@ -23,7 +23,7 @@
           width: 550px;
           margin: 0 auto;
       }
-      .new-tweet {
+      .create-tweet {
         width: 520;
         padding: 15px;
         background: #fff;
@@ -83,13 +83,15 @@
 
         tweets = tweets || this.tweets;
 
+        //$("#tweets")
+
 
         for (var i = 0, len = tweets.length; i < len; i+=1) {
           $tweet = $('<div class="tweet"></div>');
           message = formatmsg(tweets[i].message);
 
-          $tweet.append('<span class="username"> @' + tweets[i].user + ': </span>' + '<span class="message">' + message+ '</span>' + '<span class="timestamp"> —' + $.timeago(tweets[i].created_at) + '</span>');
-          $tweet.appendTo("#tweets");
+          $tweet.append('<span class="username"> @' + tweets[i].user + '</span>: ' + '<span class="message">' + message+ '</span>' + '<span class="timestamp"> —' + $.timeago(tweets[i].created_at) + '</span>');
+          $tweet.appendTo(this.container);
         }
 
         function formatmsg(msg) {
@@ -117,10 +119,22 @@
 
       };
 
+      twittler.initEventHandlers = function() {
+        var self = this;
+        $(".username").click( function(e){
+          var username = e.currentTarget.outerText.replace("@", "");
+          e.preventDefault();
+          self.fetch(username).display();
+        });
+
+      };
+
 
       $(document).ready(function(){
         // load all tweets
         twittler.fetch().display();
+        // attach event handlers;
+        twittler.initEventHandlers();
 
       });
 
@@ -129,9 +143,11 @@
   </head>
   <body>
     <div class="container">
-      <div class="new-tweet">  
+      <div class="create-tweet">  
         <input type="text" id="create">
       </div>
+      <!-- <div class="new-tweets">
+      </div> -->
       <div id="tweets">
       </div>
     </div>
