@@ -1,10 +1,66 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <style>
+      body {
+        background: #fafafa;
+        font-family: Open Sans;
+        font-size: 13px;
+      }
+
+      input[type=text] {
+        font-size: 13px;
+        background: #fff;
+        border: 1px solid #dbdbdb;
+        height: 25px;
+        width: 99%;
+      }
+      input[type=text]:focus {  
+        outline: none;
+      }
+      .container {
+          width: 550px;
+          margin: 0 auto;
+      }
+      .new-tweet {
+        width: 520;
+        padding: 15px;
+        background: #fff;
+        border-bottom: 1px solid #dbdbdb;
+        height: 100px;
+      }
+      #tweets {
+  
+      }
+
+
+      .tweet {
+        margin: 7px 0;
+        padding: 15px;
+        width: auto;
+        background: #fff;
+        border-bottom: 1px solid #dbdbdb;
+      }
+      .username {
+        font-weight: bold;
+        cursor: pointer;
+        color: #0297ff;
+      }
+      .hashtag {
+        color: #0297ff;
+        cursor: pointer;
+      }
+      .timestamp {
+        font-size: 11px;
+        font-style: italic;
+        color: #C2C2C2;
+        
+      }
+    </style>
     <script src="jquery.js"></script>
+    <script src="timeago.js"></script>
     <script src="data_generator.js"></script>
-  </head>
-  <body>
     <script>
 
       window.twittler = {};
@@ -23,26 +79,61 @@
 
       twittler.display = function(tweets) {
         var $tweet;
+        var message;
 
         tweets = tweets || this.tweets;
 
+
         for (var i = 0, len = tweets.length; i < len; i+=1) {
-          $tweet = $('<div></div>');
-          $tweet.text('@' + tweets[i].user + ': ' + tweets[i].message);
+          $tweet = $('<div class="tweet"></div>');
+          message = formatmsg(tweets[i].message);
+
+          $tweet.append('<span class="username"> @' + tweets[i].user + ': </span>' + '<span class="message">' + message+ '</span>' + '<span class="timestamp"> —' + $.timeago(tweets[i].created_at) + '</span>');
           $tweet.appendTo("#tweets");
         }
+
+        function formatmsg(msg) {
+          var formattedmsg;
+          var hashtagIndex;
+          var hashtag;
+          var begin;
+          var end;
+
+          hashtagIndex = msg.indexOf('#');
+
+          if (hashtagIndex > -1) {
+            begin = hashtagIndex;
+            for (var i = hashtagIndex; i < msg.length; i++) {
+               if (msg[i] === ' ') {
+                  end = i;
+                  break;
+               }
+            }
+            formattedmsg = msg.slice(0, begin) + '<span class="hashtag">' + msg.slice(begin, end) + '</span>';
+          }
+
+          return formattedmsg || msg;
+        }
+
       };
 
 
       $(document).ready(function(){
         // load all tweets
         twittler.fetch().display();
+
       });
 
 
     </script>
-
-    <div id="tweets">
+  </head>
+  <body>
+    <div class="container">
+      <div class="new-tweet">  
+        <input type="text" id="create">
+      </div>
+      <div id="tweets">
+      </div>
     </div>
 
   </body>
