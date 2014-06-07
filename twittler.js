@@ -102,13 +102,21 @@
         $(".username").click( function(e){
           e.preventDefault();
           var username = e.currentTarget.outerText.replace("@", "");
-          self.fetch(username).display().listen();
+
           self.view = username;
+          self.fetch(username).display().listen();
+          $('#viewall').show(); //show "view all" link to go back
         });
 
         $("#new-tweets").click( function(e){
           e.preventDefault();
           $('#new-tweets').text('');
           self.fetch(self.view).display().listen();
+        });
+
+        $('#viewall').click( function(e) {
+          e.preventDefault();
+          self.fetch().display().listen();
+          $('#viewall').hide();
         });
       };
