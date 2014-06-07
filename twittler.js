@@ -14,23 +14,25 @@
       };
 
       twittler.listen = function() {
+        var self = this;
         var startlen = self.tweets.length;
         var tweetcount;
-        var self = this;
 
-        setTimeout( function() {
+        var intervalId = setInterval(listener, 300);
+
+        function listener() {
           if (self.tweets.length > startlen) {
             tweetcount = self.tweets.length - startlen;
             updateNewTweetCount(tweetcount);
-            startlen = self.tweets.length;
           }
-        }, 300);
+        }
 
         function updateNewTweetCount(count) {
           var newtweets = $('#new-tweets');
-
           newtweets.text(count + ' new tweets');
         }
+
+        return intervalId;
       };
 
       twittler.display = function(tweets) {
@@ -73,6 +75,8 @@
 
           return formattedmsg || msg;
         }
+
+        return this;
       };
 
       twittler.initEventHandlers = function() {

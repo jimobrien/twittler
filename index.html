@@ -78,11 +78,13 @@
     <script>
 
       $(document).ready(function(){
-        // load all tweets
-        twittler.fetch().display();
+        // load all tweets and listen for new tweets
+        twittler.fetch().display().listen();
 
         // attach event handlers;
         twittler.initEventHandlers();
+
+
       });
 
     </script>
