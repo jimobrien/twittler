@@ -68,10 +68,11 @@
       twittler.container = "#tweets";
       twittler.tweets = [];
       twittler.fetch = function(user) {
+
         if (!user) {
           this.tweets = streams.home;
         } else {
-          this.tweets = streams.home[user];
+          this.tweets = streams.users[user];
         }
 
         return this;
@@ -83,8 +84,7 @@
 
         tweets = tweets || this.tweets;
 
-        //$("#tweets")
-
+        $("#tweets").html(''); // clear
 
         for (var i = 0, len = tweets.length; i < len; i+=1) {
           $tweet = $('<div class="tweet"></div>');
@@ -116,7 +116,6 @@
 
           return formattedmsg || msg;
         }
-
       };
 
       twittler.initEventHandlers = function() {
@@ -126,16 +125,15 @@
           e.preventDefault();
           self.fetch(username).display();
         });
-
       };
 
 
       $(document).ready(function(){
         // load all tweets
         twittler.fetch().display();
+
         // attach event handlers;
         twittler.initEventHandlers();
-
       });
 
 
