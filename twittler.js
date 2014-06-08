@@ -13,6 +13,8 @@
 
       twittler.intervalId = null;
 
+      twittler.writeTweet = writeTweet;
+
       twittler.fetch = function(view) {
 
         if (!view || view === 'home') {
@@ -123,11 +125,19 @@
           $('#viewall').hide();
         });
 
-        $("#create input").keypress(function(event) {
-            if (event.which == 13) {
-                event.preventDefault();
-                $("#create").submit();
+        $("input").keypress(function(e) {
+            if (e.which == 13) {
+              e.preventDefault();
+              $("#create").submit(function(e){
+                e.preventDefault();
+                var msg = $('#message').val();
+                writeTweet(msg);
+                $('#message').val(''); // clear 
+                return true;
+              });
+              //$("#create").submit();
             }
+            return true;
         });
 
       };
