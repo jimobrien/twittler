@@ -125,13 +125,14 @@
           $('#viewall').hide();
         });
 
+        // submit new tweet on Enter keypress
         $("input").keypress(function(e) {
             if (e.which == 13) {
               e.preventDefault();
               $("#create").submit(function(e){
                 e.preventDefault();
                 var msg = $('#message').val();
-                writeTweet(msg);
+                self.writeTweet(msg);
                 $('#message').val(''); // clear 
                 return true;
               });
