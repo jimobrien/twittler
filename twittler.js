@@ -84,7 +84,6 @@
         self.intervalId = setInterval(listener, 300);
 
         function listener() {
-
           if (self.tweets.length > startlen) {
             self.newTweetCount = self.tweets.length - startlen;
             updateNewTweetCount(self.newTweetCount);
@@ -99,6 +98,21 @@
 
       twittler.initEventHandlers = function() {
         var self = this;
+
+        // submit new tweet on Enter keypress
+        $("input").unbind('keypress').keypress(function(e) { // need to unbind keypress and bind again otherwise input is submitted multiple times.. more info: http://webroxtar.com/2011/10/solution-jquery-click-event-gets-called-twice-fires-twice/
+
+            if (e.which === 13) {
+              e.preventDefault();
+              var msg = $('#message').val();
+              self.writeTweet(msg);
+              $('#message').val(''); // clear 
+
+              return false;
+            }
+            return true;
+            
+        });
 
         // load tweets for specific user when username is clicked
         $(".username").click( function(e){
@@ -123,23 +137,6 @@
           self.view = 'home';
           self.fetch(self.view).display().listen();
           $('#viewall').hide();
-        });
-
-        // submit new tweet on Enter keypress
-        $("input").unbind('keypress').keypress(function(e) { // need to unbind keypress and bind again otherwise input is submitted multiple times.. more info: http://webroxtar.com/2011/10/solution-jquery-click-event-gets-called-twice-fires-twice/
-
-            if (e.which === 13) {
-              console.log("exec");
-              e.preventDefault();
-
-              var msg = $('#message').val();
-              self.writeTweet(msg);
-              $('#message').val(''); // clear 
-
-              return false;
-            }
-            return true;
-            
         });
 
       };
