@@ -39,14 +39,22 @@
         /*height: 100px;*/
       }
 
+      #actions {
+        display: block;
+        padding: 0 15px;
+        height: 18px;
+        color: #0297ff;
+        margin: 10px 0;
+      }
       #viewall {
+        cursor: pointer;
+        text-align: left;
         display: none;
       }
       #new-tweets {
-        margin: 10px 0;
-        /*height: 30px;*/
-        color: #0297ff;
-        text-align: center;
+        cursor: pointer;
+        display: inline;
+        text-align: left;
       }
 
 
@@ -82,7 +90,6 @@
       $(document).ready(function(){
         // load all tweets and listen for new tweets
         twittler.fetch().display().listen();
-
       });
 
     </script>
@@ -92,9 +99,9 @@
       <div class="create-tweet">  
         <input type="text" id="create">
       </div>
-      <span id="viewall">view all</span>
-      <div id="new-tweets">
-        
+      <div id="actions">
+        <div id="viewall">view all <span style="color:#ddd;">|</span></div>
+        <div id="new-tweets"></div>
       </div>
       <div id="tweets">
       </div>

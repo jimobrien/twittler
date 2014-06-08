@@ -105,18 +105,21 @@
 
           self.view = username;
           self.fetch(username).display().listen();
-          $('#viewall').show(); //show "view all" link to go back
+          $('#viewall').css('display', 'inline-block'); //show "view all" link to go back
         });
 
+        // load new tweets when clicked
         $("#new-tweets").click( function(e){
           e.preventDefault();
           $('#new-tweets').text('');
           self.fetch(self.view).display().listen();
         });
 
+        // load all tweets when clicked
         $('#viewall').click( function(e) {
           e.preventDefault();
-          self.fetch().display().listen();
+          self.view = 'home';
+          self.fetch(self.view).display().listen();
           $('#viewall').hide();
         });
       };
