@@ -135,9 +135,10 @@
                 $('#message').val(''); // clear 
                 return true;
               });
-              //$("#create").submit();
+              $("#create").submit();
+              return false;
             }
-            return true;
+            
         });
 
       };
