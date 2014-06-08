@@ -126,19 +126,19 @@
         });
 
         // submit new tweet on Enter keypress
-        $("input").keypress(function(e) {
-            if (e.which == 13) {
+        $("input").unbind('keypress').keypress(function(e) { // need to unbind keypress and bind again otherwise input is submitted multiple times.. more info: http://webroxtar.com/2011/10/solution-jquery-click-event-gets-called-twice-fires-twice/
+
+            if (e.which === 13) {
+              console.log("exec");
               e.preventDefault();
-              $("#create").submit(function(e){
-                e.preventDefault();
-                var msg = $('#message').val();
-                self.writeTweet(msg);
-                $('#message').val(''); // clear 
-                return true;
-              });
-              $("#create").submit();
+
+              var msg = $('#message').val();
+              self.writeTweet(msg);
+              $('#message').val(''); // clear 
+
               return false;
             }
+            return true;
             
         });
 
