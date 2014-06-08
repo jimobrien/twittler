@@ -16,9 +16,12 @@ window.users = Object.keys(streams.users);
 // utility function for adding tweets to our data structures
 var addTweet = function(newTweet){
   var username = newTweet.user;
+
+  // if the user doesn't exist create the data structure to hold tweets for the user
   if (!streams.users[username]) {
     streams.users[username] = [];
   } 
+  
   streams.users[username].unshift(newTweet);
   streams.home.unshift(newTweet);
 };
