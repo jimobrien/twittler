@@ -107,7 +107,7 @@
               var msg = $('#message').val();
               self.writeTweet(msg);
               $('#message').val(''); // clear 
-
+              self.fetch(self.view).display().listen();
               return false;
             }
             return true;
