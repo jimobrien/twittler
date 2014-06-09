@@ -136,6 +136,7 @@
           $('#viewall').css('display', 'inline-block'); //show "view all" link to go back
         });
 
+        // view all tweets for a specific hashtag
         $(".hashtag").click( function(e){
           e.preventDefault();
           var hashtag = e.currentTarget.outerText;

@@ -7,6 +7,7 @@
 window.streams = {};
 streams.home = [];
 streams.users = {};
+streams.hashtags = {};
 streams.users.shawndrost = [];
 streams.users.sharksforcheap = [];
 streams.users.mracus = [];
@@ -21,6 +22,11 @@ var addTweet = function(newTweet){
   if (!streams.users[username]) {
     streams.users[username] = [];
   } 
+
+  // if the tweet contains a hashtag, add it to a list for that hashtag
+  if (newTweet.message.indexOf('#') > -1) {
+
+  }
 
   streams.users[username].unshift(newTweet);
   streams.home.unshift(newTweet);
