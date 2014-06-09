@@ -24,9 +24,12 @@
       };
 
       twittler.fetch = function(view) {
-
         if (!view || view === 'home') {
           this.tweets = streams.home;
+        } else if (view.indexOf('#') > -1) {
+          this.tweets = streams.home.filter( function(tweet) {
+            return tweet.message.indexOf(view) > 1;
+          });
         } else {
           this.tweets = streams.users[view];
         }
@@ -130,6 +133,14 @@
 
           self.view = username;
           self.fetch(username).display().listen();
+          $('#viewall').css('display', 'inline-block'); //show "view all" link to go back
+        });
+
+        $(".hashtag").click( function(e){
+          e.preventDefault();
+          var hashtag = e.currentTarget.outerText;
+          self.view = hashtag;
+          self.fetch(hashtag).display().listen();
           $('#viewall').css('display', 'inline-block'); //show "view all" link to go back
         });
 
