@@ -15,9 +15,12 @@
 
       twittler.writeTweet = function(msg) {
         msg = msg || $('#message').val();
-        writeTweet(msg);
-        $('#message').val(''); // clear input
-        this.fetch(self.view).display().listen(); // refresh tweets
+
+        if (msg && msg !== '') {
+          writeTweet(msg);
+          $('#message').val(''); // clear input
+          this.fetch(self.view).display().listen(); // refresh tweets
+        }
       };
 
       twittler.fetch = function(view) {
