@@ -1,0 +1,104 @@
+body {
+  background: #fafafa;
+  font-family: Open Sans;
+  font-size: 13px;
+  color: #555;
+}
+.container {
+  width: 550px;
+  margin: 0 auto;
+}
+
+
+/* compose tweet container */
+.create-tweet {
+  width: 520;
+  padding: 5px;
+  background: #fff;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+
+/* input text field */
+input[type=text] {
+  font-size: 16px;
+  background: #fff;
+  border: 1px solid #fff;
+  padding: 4px 6px;
+  height: 20px;
+  width: 83%;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+input[type=text]:focus {  
+  outline: 0;
+
+}
+
+
+/* submit button */
+input[type=submit] {
+  border: none;
+  outline: none;
+  background: #0297ff;
+  padding: 10px;
+  color: #fff;
+}
+input[type=submit] {
+  outline: none;
+}
+#submittweet {
+  position: absolute;
+  width: 83px;
+  top: 8px;
+  height: 41px;
+}
+#submittweet:hover {
+  background: #3CAFFF;
+}
+
+
+/* action bar */
+#actions {
+  display: block;
+  padding: 0 15px;
+  height: 18px;
+  color: #0297ff;
+  margin: 10px 0;
+}
+#viewall {
+  cursor: pointer;
+  text-align: left;
+  display: none;
+}
+#new-tweets {
+  cursor: pointer;
+  display: inline;
+  text-align: left;
+}
+
+
+/* individual tweet styles */
+.tweet {
+  margin: 7px 0;
+  padding: 15px;
+  width: auto;
+  background: #fff;
+  border-bottom: 1px solid #dbdbdb;
+}
+.username {
+  font-weight: bold;
+  cursor: pointer;
+  color: #0297ff;
+}
+.hashtag {
+  color: #0297ff;
+  cursor: pointer;
+}
+.timestamp {
+  font-size: 11px;
+  font-style: italic;
+  color: #C2C2C2;
+}
