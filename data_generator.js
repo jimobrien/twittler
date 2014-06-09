@@ -17,6 +17,8 @@ window.users = Object.keys(streams.users);
 // utility function for adding tweets to our data structures
 var addTweet = function(newTweet){
   var username = newTweet.user;
+  var hashtagIndex = newTweet.message.indexOf('#');
+  var hashtag;
 
   // if the user doesn't exist create the data structure to hold tweets for the user
   if (!streams.users[username]) {
@@ -24,12 +26,31 @@ var addTweet = function(newTweet){
   } 
 
   // if the tweet contains a hashtag, add it to a list for that hashtag
-  if (newTweet.message.indexOf('#') > -1) {
-
+  if ( hashtagIndex > -1) {
+    hashtag = parseHashtag(newTweet.message);
+    if (!streams.hashtags[hashtag]) {
+      streams.hashtags[hashtag] = [];
+    }
+    streams.hashtags[hashtag].unshift(newTweet);
   }
 
   streams.users[username].unshift(newTweet);
   streams.home.unshift(newTweet);
+
+  function parseHashtag(msg) {
+    var hashtag;
+    var begin;
+    var end;
+
+    begin = hashtagIndex;
+    for (var i = hashtagIndex; i < msg.length; i++) {
+       if (msg[i] === ' ') {
+          end = i;
+          break;
+       }
+    }
+    return msg.slice(begin, end);
+  }
 };
 
 // utility function

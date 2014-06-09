@@ -27,9 +27,7 @@
         if (!view || view === 'home') {
           this.tweets = streams.home;
         } else if (view.indexOf('#') > -1) {
-          this.tweets = streams.home.filter( function(tweet) {
-            return tweet.message.indexOf(view) > 1;
-          });
+          this.tweets = streams.hashtags[view];
         } else {
           this.tweets = streams.users[view];
         }
