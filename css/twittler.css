@@ -5,7 +5,7 @@ body {
   color: #555;
 }
 .container {
-  width: 550px;
+  /*width: 550px;*/
   margin: 0 auto;
 }
 
@@ -51,8 +51,8 @@ input[type=submit] {
 }
 #submittweet {
   position: absolute;
-  width: 83px;
-  top: 8px;
+  width: 14.4%;
+  top: 0;
   height: 41px;
 }
 #submittweet:hover {
