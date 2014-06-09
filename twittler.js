@@ -19,7 +19,7 @@
         if (msg && msg !== '') {
           writeTweet(msg);
           $('#message').val(''); // clear input
-          this.fetch(self.view).display().listen(); // refresh tweets
+          this.fetch(this.view).display().listen(); // refresh tweets
         }
       };
 
@@ -111,9 +111,7 @@
         $("input").unbind('keypress').keypress(function(e) { // need to unbind keypress and bind again otherwise input is submitted multiple times.. more info: http://webroxtar.com/2011/10/solution-jquery-click-event-gets-called-twice-fires-twice/
             if (e.which === 13) {
               e.preventDefault();
-
               self.writeTweet(); 
-
               return false;
             }
             return true;
