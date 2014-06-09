@@ -9,7 +9,22 @@
         font-size: 13px;
         color: #555;
       }
+      .container {
+        width: 550px;
+        margin: 0 auto;
+      }
+      
 
+      /* compose tweet container */
+      .create-tweet {
+        width: 520;
+        padding: 5px;
+        background: #fff;
+        border-bottom: 1px solid #dbdbdb;
+      }
+
+
+      /* input text field */
       input[type=text] {
         font-size: 16px;
         background: #fff;
@@ -24,9 +39,11 @@
       }
       input[type=text]:focus {  
         outline: 0;
-        /*border-color: #dbdbdb;*/
-      }
 
+      }
+      
+
+      /* submit button */
       input[type=submit] {
         border: none;
         outline: none;
@@ -47,18 +64,8 @@
         background: #3CAFFF;
       }
 
-      .container {
-          width: 550px;
-          margin: 0 auto;
-      }
-      .create-tweet {
-        width: 520;
-        padding: 5px;
-        background: #fff;
-        border-bottom: 1px solid #dbdbdb;
-        /*height: 100px;*/
-      }
 
+      /* action bar */
       #actions {
         display: block;
         padding: 0 15px;
@@ -78,6 +85,7 @@
       }
 
 
+      /* individual tweet styles */
       .tweet {
         margin: 7px 0;
         padding: 15px;
@@ -98,8 +106,8 @@
         font-size: 11px;
         font-style: italic;
         color: #C2C2C2;
-        
       }
+
     </style>
     <script src="jquery.js"></script>
     <script src="timeago.js"></script>
@@ -111,7 +119,6 @@
         // load all tweets and listen for new tweets
         twittler.fetch().display().listen();
       });
-
     </script>
   </head>
   <body>
