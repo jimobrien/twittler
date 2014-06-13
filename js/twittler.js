@@ -13,16 +13,6 @@ twittler.newTweetCount = null;
 
 twittler.intervalId = null;
 
-twittler.writeTweet = function(msg) {
-  msg = msg || $('#message').val();
-
-  if (msg && msg !== '') {
-    writeTweet(msg);
-    $('#message').val(''); // clear input
-    this.fetch(this.view).display().listen(); // refresh tweets
-  }
-};
-
 twittler.fetch = function(view) {
   if (!view || view === 'home') {
     this.tweets = streams.home;
@@ -50,6 +40,8 @@ twittler.display = function(tweets) {
     $tweet.appendTo(this.container.tweets);
   }
 
+  this.initEventHandlers();
+
   function formatmsg(msg) {
     var formattedmsg;
     var hashtagIndex;
@@ -73,8 +65,6 @@ twittler.display = function(tweets) {
     return formattedmsg || msg;
   }
 
-  this.initEventHandlers();
-
   return this;
 };
 
@@ -83,7 +73,7 @@ twittler.listen = function() {
   var startlen = self.tweets.length;
   var intervalId;
 
-  // if an old interval loop exists, kill it
+  // if an existing interval loop is running, kill it
   if (self.intervalId) {
     $(self.container.newTweets).text(''); //clear tweet counter
     clearInterval(self.intervalId); // kill previous interval loop
@@ -102,7 +92,16 @@ twittler.listen = function() {
   function updateNewTweetCount(count) {
     $(self.container.newTweets).text(count + ' new tweets');
   }
+};
 
+twittler.writeTweet = function(msg) {
+  msg = msg || $('#message').val();
+
+  if (msg && msg !== '') {
+    writeTweet(msg);
+    $('#message').val(''); // clear input
+    this.fetch(this.view).display().listen(); // refresh tweets
+  }
 };
 
 twittler.initEventHandlers = function() {
@@ -129,7 +128,6 @@ twittler.initEventHandlers = function() {
   $(".username").click( function(e){
     e.preventDefault();
     var username = e.currentTarget.outerText.replace("@", "");
-
     self.view = username;
     self.fetch(username).display().listen();
     $('#viewall').css('display', 'inline-block'); //show "view all" link to go back
@@ -158,5 +156,4 @@ twittler.initEventHandlers = function() {
     self.fetch(self.view).display().listen();
     $('#viewall').hide();
   });
-
 };
