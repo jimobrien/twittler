@@ -21,6 +21,18 @@
     this.fetch().display().listen();
   };
 
+  app.setVisitor = function() {
+    var username = $('#username').val();
+
+    if (username && username !== '') {
+      w.visitor = username;
+      $('#username').val(''); // clear input
+      $('#username').css('display', 'none'); 
+      $('.enter-username').css('display', 'none'); 
+      $('.create-tweet').css('display', 'block'); 
+    }
+  };
+
   app.fetch = function(view) {
     if (!view || view === 'home') {
       this.tweets = streams.home; // all tweets
@@ -109,15 +121,6 @@
       writeTweet(msg);
       $('#message').val(''); // clear input
       this.fetch(this.view).display().listen(); // refresh tweets
-    }
-  };
-
-  app.setVisitor = function(username) {
-
-    if (username && username !== '') {
-      w.visitor = $('#username').val();
-      $('#username').val(''); // clear input
-      
     }
   };
 
