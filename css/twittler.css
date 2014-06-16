@@ -5,7 +5,6 @@ body {
   color: #555;
 }
 .container {
-  /*width: 550px;*/
   margin: 0 auto;
 }
 
@@ -24,6 +23,9 @@ body {
 /* compose tweet container */
 .create-tweet {
   display: none;
+}
+.create-tweet, 
+.enter-username {
   width: 520;
   padding: 5px;
   background: #fff;
@@ -52,22 +54,17 @@ input[type=text]:focus {
 
 /* submit button */
 input[type=submit] {
+  position: absolute;
+  width: 14.4%;
+  top: 0;
+  height: 41px;
   border: none;
   outline: none;
   background: #0297ff;
   padding: 10px;
   color: #fff;
 }
-input[type=submit] {
-  outline: none;
-}
-#submittweet {
-  position: absolute;
-  width: 14.4%;
-  top: 0;
-  height: 41px;
-}
-#submittweet:hover {
+input[type=submit]:hover {
   background: #3CAFFF;
 }
 

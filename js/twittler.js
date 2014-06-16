@@ -2,6 +2,8 @@
 
   var app = {};
 
+  app.visitor = w.visitor;
+
   app.view = 'home';
 
   app.tweets = [];
@@ -110,6 +112,15 @@
     }
   };
 
+  app.setVisitor = function(username) {
+
+    if (username && username !== '') {
+      w.visitor = $('#username').val();
+      $('#username').val(''); // clear input
+      
+    }
+  };
+
   app.initEventHandlers = function() {
     var self = this;
 
@@ -117,10 +128,22 @@
     $("input").unbind('keypress').keypress(function(e) { // need to unbind keypress and bind again otherwise input is submitted multiple times.. more info: http://webroxtar.com/2011/10/solution-jquery-click-event-gets-called-twice-fires-twice/
       if (e.which === 13) {
         e.preventDefault();
-        self.writeTweet(); 
+
+        if (e.target.id === 'username') {
+          self.setVisitor();
+        } else {
+          self.writeTweet(); 
+        }
+
         return false;
       }
       return true;
+    });
+
+    // submit new tweet on button click
+    $('#submitusername').click( function(e) {
+      e.preventDefault();
+
     });
 
     // submit new tweet on button click
