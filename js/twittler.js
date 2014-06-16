@@ -21,11 +21,11 @@
 
   app.fetch = function(view) {
     if (!view || view === 'home') {
-      this.tweets = streams.home;
+      this.tweets = streams.home; // all tweets
     } else if (view.indexOf('#') > -1) {
-      this.tweets = streams.hashtags[view];
+      this.tweets = streams.hashtags[view]; // all tweets containing specific hashtag
     } else {
-      this.tweets = streams.users[view];
+      this.tweets = streams.users[view]; // all tweets for a user
     }
 
     return this;
