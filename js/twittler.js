@@ -146,7 +146,7 @@
     // submit new tweet on button click
     $('#submitusername').click( function(e) {
       e.preventDefault();
-
+      self.setVisitor();
     });
 
     // submit new tweet on button click
