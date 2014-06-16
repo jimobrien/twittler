@@ -51,7 +51,7 @@
 
     tweets = tweets || this.tweets;
 
-    $("#tweets").html(''); // clear container
+    $("#tweets").html(''); 
 
     for (var i = 0, len = tweets.length; i < len; i+=1) {
       $tweet = $('<div class="tweet"></div>');
