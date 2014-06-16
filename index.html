@@ -12,7 +12,7 @@
       visitor = 'test';
       $(document).ready(function(){
         // load all tweets and listen for new tweets
-        twittler.fetch().display().listen();
+        twittler.init();
       });
     </script>
   </head>
@@ -24,7 +24,7 @@
       <div class="col-md-6">
         <div class="create-tweet">  
           <form id="create" autocomplete="off">
-            <input id="message" type="text" placeholder="Compose a tweet">
+            <input id="message" type="text" placeholder="Say something to the world">
             <input id="submittweet" type="submit" value="Tweet">
           </form>
         </div>

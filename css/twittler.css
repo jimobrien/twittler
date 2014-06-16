@@ -95,6 +95,11 @@ input[type=submit] {
   width: auto;
   background: #fff;
   border-bottom: 1px solid #dbdbdb;
+  
+}
+.tweet:hover {
+  
+
 }
 .username {
   font-weight: bold;
