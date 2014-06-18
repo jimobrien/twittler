@@ -9,29 +9,31 @@
     <script src="js/data_generator.js"></script>
     <script src="js/twittler.js"></script>
     <script>
-      visitor = 'test';
       $(document).ready(function(){
+
         // load all tweets and listen for new tweets
         twittler.init();
+
       });
+
     </script>
   </head>
   <body>
     <div class="container">
       <div id="logo" class="col-md-3">
-        <img src="img/twittlebird2.png" alt="twittler">
+        <object type="image/svg+xml" data="img/twittlerbird.svg" id="birdObject"></object>
       </div>
       <div class="col-md-6">
         <div class="enter-username">  
           <form autocomplete="off">
             <input id="username" type="text" placeholder="Enter a handle to begin!">
-            <input id="submitusername" type="submit" value="Submit">
+            <!-- <input id="submitusername" type="submit" value="Submit"> -->
           </form>
         </div>
         <div class="create-tweet">  
           <form id="create" autocomplete="off">
             <input id="message" type="text" placeholder="Say something to the world">
-            <input id="submittweet" type="submit" value="Tweet">
+            <!-- <input id="submittweet" type="submit" value="Tweet"> -->
           </form>
         </div>
         <div id="actions">
