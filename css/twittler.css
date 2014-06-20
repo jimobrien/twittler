@@ -37,7 +37,7 @@ input[type=text] {
   border: 1px solid #fff;
   padding: 4px 6px;
   height: 20px;
-  width: 83%;
+  width: 96%;
   transition: border linear 0.2s, box-shadow linear 0.2s;
   -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
   -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
@@ -86,17 +86,46 @@ input[type=submit]:hover {
 }
 
 
+/* swell animation on hover */
+@-webkit-keyframes swell {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  100% {
+    -webkit-transform: scale(1.02);
+    transform: scale(1.02);
+  }
+}
+@keyframes swell {
+  0% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+  100% {
+    -webkit-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    transform: scale(1.02);
+  }
+}
+.swell:hover {
+  -webkit-animation-duration: .2s;
+  animation-duration: .2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: swell;
+  animation-name: swell;
+}
+
 /* individual tweet styles */
 .tweet {
-  margin: 7px 0;
   padding: 15px;
   width: auto;
+  border-bottom: 15px solid #F6F7F0;
   background: #fff;
-  
-}
-.tweet:hover {
-  
-
 }
 .username {
   font-weight: bold;

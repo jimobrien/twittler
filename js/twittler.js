@@ -1,8 +1,8 @@
-( function(w) {
+  ( function(exports) {
 
   var app = {};
 
-  app.visitor = w.visitor;
+  app.visitor = exports.visitor;
 
   app.view = 'home';
 
@@ -25,7 +25,7 @@
     var username = $('#username').val();
 
     if (username && username !== '') {
-      w.visitor = username;
+      exports.visitor = username;
       $('#username').val(''); // clear input
       $('#username').css('display', 'none'); 
       $('.enter-username').css('display', 'none'); 
@@ -54,7 +54,7 @@
     $("#tweets").html(''); 
 
     for (var i = 0, len = tweets.length; i < len; i+=1) {
-      $tweet = $('<div class="tweet"></div>');
+      $tweet = $('<div class="tweet swell"></div>');
       message = formatmsg(tweets[i].message);
       $tweet.append('<span class="username"> @' + tweets[i].user + '</span>: ' + '<span class="message">' + message+ '</span>' + '<span class="timestamp"> —' + $.timeago(tweets[i].created_at) + '</span>');
       $tweet.appendTo(this.container.tweets);
@@ -143,18 +143,6 @@
       return true;
     });
 
-    // submit new tweet on button click
-    $('#submitusername').click( function(e) {
-      e.preventDefault();
-      self.setVisitor();
-    });
-
-    // submit new tweet on button click
-    $('#submittweet').click( function(e) {
-      e.preventDefault();
-      self.writeTweet(); 
-    });
-
     // load tweets for specific user when username is clicked
     $(".username").click( function(e){
       e.preventDefault();
@@ -189,6 +177,6 @@
     });
   };
 
-  w.twittler = app;
+  exports.twittler = app;
 
 })(window);
