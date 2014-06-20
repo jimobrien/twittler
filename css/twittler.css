@@ -12,9 +12,15 @@ body {
   text-align: center;
   margin-bottom: 10px;
 }
+#birdObject:hover {
+  transform:rotate(-3deg);
+  -ms-transform:rotate(-3deg); /* IE 9 */
+  -webkit-transform:rotate(-3deg); /* Opera, Chrome, and Safari */
+}
 #birdObject {
   width: 55%;
   height: 60px;
+
 }
 
 /* compose tweet container */

@@ -30,6 +30,7 @@
       $('#username').css('display', 'none'); 
       $('.enter-username').css('display', 'none'); 
       $('.create-tweet').css('display', 'block'); 
+      $('#message').focus();
     }
   };
 
@@ -79,7 +80,7 @@
               break;
            }
         }
-        formattedmsg = msg.slice(0, begin) + '<span class="hashtag">' + msg.slice(begin, end) + '</span>';
+        formattedmsg = msg.slice(0, begin) + '<span class="hashtag">' + msg.slice(begin, end) + '</span> ' + msg.slice(end + 1);
       }
 
       return formattedmsg || msg;
