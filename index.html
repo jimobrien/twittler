@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-grid.css">
     <link rel="stylesheet" href="css/twittler.css">
     <script src="js/jquery.js"></script>
@@ -15,33 +17,62 @@
       });
 
     </script>
+    <style>
+      @media (min-width: 768px) {
+        #logo {
+          padding-right: 0;
+        }
+        #input-container {
+          padding-left: 0;
+        }
+      }
+
+      #tweets-container {
+        margin-top: 100px;
+      }
+
+      #header-nav {
+        background: #F7F6F0;
+        border: none;
+        padding: 15px 0;
+      }
+    </style>
   </head>
+
   <body>
-    <div class="container">
-      <div id="logo" class="col-md-3">
-        <object type="image/svg+xml" data="img/twittlerbird.svg" id="birdObject"></object>
-      </div>
-      <div class="col-md-6">
-        <div class="enter-username">  
-          <form autocomplete="off">
-            <input id="username" type="text" placeholder="Enter a handle to begin!">
-            <!-- <input id="submitusername" type="submit" value="Submit"> -->
-          </form>
+    <div id="header-nav" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div id="logo" class="col-sm-3">
+          <object type="image/svg+xml" data="img/twittlerbird.svg" id="birdObject"></object>
         </div>
-        <div class="create-tweet">  
-          <form id="create" autocomplete="off">
-            <input id="message" type="text" placeholder="Say something to the world">
-            <!-- <input id="submittweet" type="submit" value="Tweet"> -->
-          </form>
-        </div>
-        <div id="actions">
-          <div id="viewall">view all <span style="color:#ddd;">|</span></div>
-          <div id="new-tweets"></div>
-        </div>
-        <div id="tweets">
+
+        <div id="input-container" class="col-sm-6">
+          <div class="enter-username">  
+            <form autocomplete="off">
+              <input id="username" type="text" placeholder="Enter a handle to begin!">
+            </form>
+          </div>
+          <div class="create-tweet">  
+            <form id="create" autocomplete="off">
+              <input id="message" type="text" placeholder="Say something to the world">
+            </form>
+          </div>
+          <div id="actions">
+            <div id="viewall">view all <span style="color:#ddd;">|</span></div>
+            <div id="new-tweets"></div>
+          </div>
         </div>
       </div>
     </div>
+    <div class="container">
+      
+        <div id="tweets-container" class="col-sm-6 col-sm-offset-3">
+          <div id="tweets">
+          </div>
+        </div>        
+
+    </div>
 
   </body>
+
 </html>

@@ -122,6 +122,7 @@
       writeTweet(msg);
       $('#message').val(''); // clear input
       this.fetch(this.view).display().listen(); // refresh tweets
+      $("html, body").animate({ scrollTop: 0 }, "fast"); // scroll back to top
     }
   };
 
@@ -136,7 +137,7 @@
         if (e.target.id === 'username') {
           self.setVisitor();
         } else {
-          self.writeTweet(); 
+          self.writeTweet();             
         }
 
         return false;

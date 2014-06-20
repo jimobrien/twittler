@@ -78,7 +78,7 @@ input[type=submit]:hover {
   padding: 0 15px;
   height: 18px;
   color: #389DFE;
-  margin: 15px 0;
+  margin: 15px 0 0;
 }
 #viewall {
   cursor: pointer;
