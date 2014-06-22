@@ -1,20 +1,14 @@
   ( function(exports) {
 
   var app = {};
-
   app.visitor = exports.visitor;
-
   app.view = 'home';
-
   app.tweets = [];
-
   app.container = {
     tweets: "#tweets",
     newTweets: "#new-tweets"
   };
-
   app.newTweetCount = null;
-
   app.intervalId = null;
 
   app.init = function() {
@@ -57,34 +51,44 @@
     for (var i = 0, len = tweets.length; i < len; i+=1) {
       $tweet = $('<div class="tweet swell"></div>');
       message = formatmsg(tweets[i].message);
-      $tweet.append('<span class="username"> @' + tweets[i].user + '</span>: ' + '<span class="message">' + message+ '</span>' + '<span class="timestamp"> —' + $.timeago(tweets[i].created_at) + '</span>');
+      $tweet.append( '<span class="username"> @' + tweets[i].user + '</span>: ' + '<span class="message">' + message+ '</span>' + '<span class="timestamp"> —' + $.timeago(tweets[i].created_at) + '</span>');
       $tweet.appendTo(this.container.tweets);
     }
 
-    this.initEventHandlers();
-
     function formatmsg(msg) {
-      var formattedmsg;
-      var hashtagIndex;
+      var formattedmsg = '';
       var hashtag;
-      var begin;
       var end;
 
-      hashtagIndex = msg.indexOf('#');
-
-      if (hashtagIndex > -1) {
-        begin = hashtagIndex;
-        for (var i = hashtagIndex; i < msg.length; i++) {
-           if (msg[i] === ' ') {
-              end = i;
-              break;
-           }
+      for (var i = 0, len = msg.length; i < len; i++) {
+        if (msg[i] === "#") {
+          hashtag = parseHashtag(i);
+          formattedmsg += hashtag;
+          i = end ; // jump the index to the ending position of the hashtag
+        } else { 
+          formattedmsg += msg[i];
         }
-        formattedmsg = msg.slice(0, begin) + '<span class="hashtag">' + msg.slice(begin, end) + '</span> ' + msg.slice(end + 1);
       }
 
-      return formattedmsg || msg;
+      function parseHashtag(start) {
+        var nextch;
+        // get the ending index of the hashtag
+        for (var i = start; i < msg.length; i++) {
+          nextch = i + 1;
+          if (!msg[nextch] || msg[nextch] === ' '){
+            end = nextch;
+            break;
+          }
+        }
+
+        return ' <span class="hashtag">' + msg.slice(start, end) + '</span> ';
+      }
+
+      return formattedmsg;
     }
+
+    this.initEventHandlers();
+    $("html, body").scrollTop(0);
 
     return this;
   };
