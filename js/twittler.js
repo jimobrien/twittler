@@ -1,4 +1,4 @@
-  ( function(exports) {
+  ( function (exports) {
 
   var app = {};
   app.visitor = exports.visitor;
@@ -11,11 +11,11 @@
   app.newTweetCount = null;
   app.intervalId = null;
 
-  app.init = function() {
+  app.init = function () {
     this.fetch().display().listen();
   };
 
-  app.setVisitor = function() {
+  app.setVisitor = function () {
     var username = $('#username').val();
 
     if (username && username !== '') {
@@ -28,7 +28,7 @@
     }
   };
 
-  app.fetch = function(view) {
+  app.fetch = function (view) {
     if (!view || view === 'home') {
       this.tweets = streams.home; // all tweets
     } else if (view.indexOf('#') > -1) {
@@ -40,7 +40,7 @@
     return this;
   };
 
-  app.display = function(tweets) {
+  app.display = function (tweets) {
     var $tweet;
     var message;
 
@@ -59,7 +59,7 @@
       var formattedmsg = '';
       var hashtag;
       var end;
-
+      // scan each character of the tweet. format hashtag if "#"" is encountered.
       for (var i = 0, len = msg.length; i < len; i++) {
         if (msg[i] === "#") {
           hashtag = parseHashtag(i);
@@ -88,12 +88,13 @@
     }
 
     this.initEventHandlers();
-    $("html, body").scrollTop(0);
+
+    $("html, body").scrollTop(0); // jump back to top of page when tweets are displayed
 
     return this;
   };
 
-  app.listen = function() {
+  app.listen = function () {
     var self = this;
     var startlen = self.tweets.length;
     var intervalId;
@@ -119,18 +120,18 @@
     }
   };
 
-  app.writeTweet = function(msg) {
+  app.writeTweet = function (msg) {
     msg = msg || $('#message').val();
 
     if (msg && msg !== '') {
-      writeTweet(msg);
-      $('#message').val(''); // clear input
+      writeTweet(msg); // function from data_generator.js
+      $('#message').val(''); // clear input field
       this.fetch(this.view).display().listen(); // refresh tweets
       $("html, body").animate({ scrollTop: 0 }, "fast"); // scroll back to top
     }
   };
 
-  app.initEventHandlers = function() {
+  app.initEventHandlers = function () {
     var self = this;
 
     // submit new tweet on Enter keypress
@@ -150,7 +151,7 @@
     });
 
     // load tweets for specific user when username is clicked
-    $(".username").click( function(e){
+    $(".username").click( function (e){
       e.preventDefault();
       var username = e.currentTarget.outerText.replace("@", "");
       self.view = username;
@@ -159,7 +160,7 @@
     });
 
     // view all tweets for a specific hashtag
-    $(".hashtag").click( function(e){
+    $(".hashtag").click( function (e){
       e.preventDefault();
       var hashtag = e.currentTarget.outerText;
       self.view = hashtag;
@@ -168,14 +169,14 @@
     });
 
     // load new tweets when clicked
-    $("#new-tweets").click( function(e){
+    $("#new-tweets").click( function (e){
       e.preventDefault();
       $('#new-tweets').text('');
       self.fetch(self.view).display().listen();
     });
 
     // load all tweets when clicked
-    $('#viewall').click( function(e) {
+    $('#viewall').click( function (e) {
       e.preventDefault();
       self.view = 'home';
       self.fetch(self.view).display().listen();
@@ -185,4 +186,4 @@
 
   exports.twittler = app;
 
-})(window);
+} )(window);
