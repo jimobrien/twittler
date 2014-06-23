@@ -1,5 +1,5 @@
 body {
-  background: #F6F7F0;
+  background: #F2EEE5;
   font-family: Open Sans;
   font-size: 13px;
   color: #555;
@@ -18,13 +18,13 @@ body {
   -webkit-transform:rotate(-3deg); /* Opera, Chrome, and Safari */
 }
 #birdObject {
-  width: 55%;
+  width: 60%;
   height: 60px;
 
 }
 
 #header-nav {
-  background: #F7F6F0;
+  background: #F2EEE5;
   border: none;
   padding: 15px 0;
 }
@@ -57,13 +57,28 @@ input[type=text] {
 input[type=text]:focus {  
   outline: 0;
 }
+::-webkit-input-placeholder {
+   color: #AFA885;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #AFA885;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #AFA885;  
+}
+
+:-ms-input-placeholder {  
+   color: #AFA885;  
+}
 
 /* action bar */
 #actions {
   display: block;
   padding: 0 15px;
   height: 18px;
-  color: #389DFE;
+  color: #969072;
   margin: 15px 0 0;
 }
 #viewall {
@@ -119,13 +134,13 @@ input[type=text]:focus {
 .tweet {
   padding: 15px;
   width: auto;
-  border-bottom: 15px solid #F6F7F0;
+  border-bottom: 15px solid #F2EEE5;
   background: #fff;
 }
 .username {
   font-weight: bold;
   cursor: pointer;
-  color: #389DFE;
+  color: #E36143;
 }
 .hashtag {
   color: #389DFE;
