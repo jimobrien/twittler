@@ -2,7 +2,7 @@
 
   var app = {};
   app.visitor = exports.visitor;
-  app.view = 'home';
+  app.feed = 'home';
   app.tweets = [];
   app.container = {
     tweets: "#tweets",
@@ -21,20 +21,20 @@
     if (username && username !== '') {
       exports.visitor = username;
       $('#username').val(''); // clear input
-      $('#username').css('display', 'none'); 
+      $('#username').css('display', 'none');
       $('.enter-username').css('display', 'none'); 
       $('.create-tweet').css('display', 'block'); 
       $('#message').focus();
     }
   };
 
-  app.fetch = function (view) {
-    if (!view || view === 'home') {
+  app.fetch = function (feed) {
+    if (!feed || feed === 'home') {
       this.tweets = streams.home; // all tweets
-    } else if (view.indexOf('#') > -1) {
-      this.tweets = streams.hashtags[view]; // all tweets containing specific hashtag
+    } else if (feed.indexOf('#') > -1) {
+      this.tweets = streams.hashtags[feed]; // all tweets containing specific hashtag
     } else {
-      this.tweets = streams.users[view]; // all tweets for a user
+      this.tweets = streams.users[feed]; // all tweets for a user
     }
 
     return this;
@@ -43,6 +43,7 @@
   app.display = function (tweets) {
     var $tweet;
     var message;
+    var docfrag = $(document.createDocumentFragment());
 
     tweets = tweets || this.tweets;
 
@@ -52,8 +53,10 @@
       $tweet = $('<div class="tweet swell"></div>');
       message = formatmsg(tweets[i].message);
       $tweet.append( '<span class="username"> @' + tweets[i].user + '</span>: ' + '<span class="message">' + message+ '</span>' + '<span class="timestamp"> —' + $.timeago(tweets[i].created_at) + '</span>');
-      $tweet.appendTo(this.container.tweets);
+      $tweet.appendTo(docfrag);
     }
+
+    docfrag.appendTo(this.container.tweets);
 
     function formatmsg(msg) {
       var formattedmsg = '';
@@ -73,7 +76,7 @@
       function parseHashtag(start) {
         var nextch;
         // get the ending index of the hashtag
-        for (var i = start; i < msg.length; i++) {
+        for (var i = start, len = msg.length; i < len; i+=1) {
           nextch = i + 1;
           if (!msg[nextch] || msg[nextch] === ' '){
             end = nextch;
@@ -126,7 +129,7 @@
     if (msg && msg !== '') {
       writeTweet(msg); // function from data_generator.js
       $('#message').val(''); // clear input field
-      this.fetch(this.view).display().listen(); // refresh tweets
+      this.fetch(this.feed).display().listen(); // refresh tweets
       $("html, body").animate({ scrollTop: 0 }, "fast"); // scroll back to top
     }
   };
@@ -154,7 +157,7 @@
     $(".username").click( function (e){
       e.preventDefault();
       var username = e.currentTarget.outerText.replace("@", "");
-      self.view = username;
+      self.feed = username;
       self.fetch(username).display().listen();
       $('#viewall').css('display', 'inline-block'); //show "view all" link to go back
     });
@@ -163,7 +166,7 @@
     $(".hashtag").click( function (e){
       e.preventDefault();
       var hashtag = e.currentTarget.outerText;
-      self.view = hashtag;
+      self.feed = hashtag;
       self.fetch(hashtag).display().listen();
       $('#viewall').css('display', 'inline-block'); //show "view all" link to go back
     });
@@ -172,14 +175,14 @@
     $("#new-tweets").click( function (e){
       e.preventDefault();
       $('#new-tweets').text('');
-      self.fetch(self.view).display().listen();
+      self.fetch(self.feed).display().listen();
     });
 
     // load all tweets when clicked
     $('#viewall').click( function (e) {
       e.preventDefault();
-      self.view = 'home';
-      self.fetch(self.view).display().listen();
+      self.feed = 'home';
+      self.fetch(self.feed).display().listen();
       $('#viewall').hide();
     });
   };
