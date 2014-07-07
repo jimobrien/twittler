@@ -1,4 +1,4 @@
-  ( function (exports) {
+(function (exports) {
 
   var app = {};
   app.visitor = exports.visitor;
@@ -43,7 +43,7 @@
   app.display = function (tweets) {
     var $tweet;
     var message;
-    var docfrag = $(document.createDocumentFragment());
+    var $docfrag = $(document.createDocumentFragment());
 
     tweets = tweets || this.tweets;
 
@@ -53,10 +53,10 @@
       $tweet = $('<div class="tweet swell"></div>');
       message = formatmsg(tweets[i].message);
       $tweet.append( '<span class="username"> @' + tweets[i].user + '</span>: ' + '<span class="message">' + message+ '</span>' + '<span class="timestamp"> —' + $.timeago(tweets[i].created_at) + '</span>');
-      $tweet.appendTo(docfrag);
+      $tweet.appendTo($docfrag);
     }
 
-    docfrag.appendTo(this.container.tweets);
+    $docfrag.appendTo(this.container.tweets);
 
     function formatmsg(msg) {
       var formattedmsg = '';
@@ -147,7 +147,6 @@
         } else {
           self.writeTweet();             
         }
-
         return false;
       }
       return true;
@@ -189,4 +188,4 @@
 
   exports.twittler = app;
 
-} )(window);
+})(window);

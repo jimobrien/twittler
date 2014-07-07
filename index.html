@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -18,22 +17,18 @@
   </head>
 
   <body>
+
     <div id="header-nav" class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div id="logo" class="col-sm-3">
           <object type="image/svg+xml" data="img/twittlerbird.svg" id="birdObject"></object>
         </div>
-
         <div id="input-container" class="col-sm-6">
           <div class="enter-username">  
-            <form autocomplete="off">
-              <input id="username" type="text" placeholder="Enter a handle to begin!">
-            </form>
+            <input id="username" type="text" placeholder="Enter a handle to begin!">
           </div>
           <div class="create-tweet">  
-            <form autocomplete="off">
-              <input id="message" type="text" placeholder="Say something to the world">
-            </form>
+            <input id="message" type="text" placeholder="Say something to the world">
           </div>
           <div id="actions">
             <div id="viewall">view all <span style="color:#ddd;">|</span></div>
@@ -42,11 +37,11 @@
         </div>
       </div>
     </div>
+
     <div class="container">
-        <div id="tweets-container" class="col-sm-6 col-sm-offset-3">
-          <div id="tweets">
-          </div>
-        </div>        
+      <div id="tweets-container" class="col-sm-6 col-sm-offset-3">
+        <div id="tweets"></div>
+      </div>   
     </div>
 
   </body>
